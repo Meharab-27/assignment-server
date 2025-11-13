@@ -154,7 +154,10 @@ app.post('/books', verifyFireBaseToken, async (req, res) => {
     });
 
     // ✅ Latest 6 books
-    
+    app.get('/latest-books', async (req, res) => {
+      const result = await bookCollection.find().sort({ created_at: 'desc' }).limit(6).toArray();
+      res.send(result);
+    });
 
     // ✅ Sort books by rating
     app.get('/books/sort/:order', async (req, res) => {
@@ -169,12 +172,7 @@ app.post('/books', verifyFireBaseToken, async (req, res) => {
     });
 
     // ✅ Add comment
-    app.post('/comments', async (req, res) => {
-      const comment = req.body;
-      comment.createdAt = new Date();
-      const result = await commentCollection.insertOne(comment);
-      res.send(result);
-    });
+    
 
     // ✅ Get comments for a specific book
     app.get('/comments/:bookId', async (req, res) => {
