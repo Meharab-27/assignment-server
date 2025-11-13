@@ -172,7 +172,12 @@ app.post('/books', verifyFireBaseToken, async (req, res) => {
     });
 
     // ✅ Add comment
-    
+    app.post('/comments', async (req, res) => {
+      const comment = req.body;
+      comment.createdAt = new Date();
+      const result = await commentCollection.insertOne(comment);
+      res.send(result);
+    });
 
     // ✅ Get comments for a specific book
     app.get('/comments/:bookId', async (req, res) => {
@@ -181,7 +186,7 @@ app.post('/books', verifyFireBaseToken, async (req, res) => {
         .find({ bookId: bookId })
         .sort({ createdAt: -1 })
         .toArray();
-      res.send(result);
+      // res.send(result);
     });
 
     // await client.db("admin").command({ ping: 1 });
