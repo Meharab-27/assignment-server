@@ -186,10 +186,10 @@ app.post('/books', verifyFireBaseToken, async (req, res) => {
         .find({ bookId: bookId })
         .sort({ createdAt: -1 })
         .toArray();
-      // res.send(result);
+      res.send(result);
     });
 
-    // await client.db("admin").command({ ping: 1 });
+    await client.db("admin").command({ ping: 1 });
     console.log("✅ Connected to MongoDB!");
   } finally {
     // await client.close();
