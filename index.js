@@ -114,18 +114,12 @@ app.post('/books', verifyFireBaseToken, async (req, res) => {
     });
 
     // ✅ Delete book
-    app.delete('/books/:id',verifyFireBaseToken,async (req, res) => {
-      const { id } = req.params;
-      const objectId = new ObjectId(id);
-      const filter = { _id: objectId };
-      const result = await bookCollection.deleteOne(filter);
-      res.send({ success: true, result });
-    });
+   
 
     // ✅ Update book
     app.put("/books/:id", verifyFireBaseToken,async (req, res) => {
       try {
-        // const id = req.params.id;
+        const id = req.params.id;
         const updatedBook = req.body;
 
         const filter = { _id: new ObjectId(id) };
