@@ -125,7 +125,7 @@ app.post('/books', verifyFireBaseToken, async (req, res) => {
     // ✅ Update book
     app.put("/books/:id", verifyFireBaseToken,async (req, res) => {
       try {
-        const id = req.params.id;
+        // const id = req.params.id;
         const updatedBook = req.body;
 
         const filter = { _id: new ObjectId(id) };
@@ -192,7 +192,7 @@ app.post('/books', verifyFireBaseToken, async (req, res) => {
     // await client.db("admin").command({ ping: 1 });
     console.log("✅ Connected to MongoDB!");
   } finally {
-    await client.close();
+    // await client.close();
   }
 }
 
